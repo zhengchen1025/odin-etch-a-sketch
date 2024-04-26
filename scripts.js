@@ -22,15 +22,17 @@ function addStyle() {
 createGrid();
 addStyle();
 
-for (let i = 0; i < sqrDivs.length; i++) {
-  const sqrDiv = sqrDivs[i];
+function addEventListeners() {
+  for (let i = 0; i < sqrDivs.length; i++) {
+    const sqrDiv = sqrDivs[i];
 
-  sqrDiv.addEventListener("mouseenter", () => {
-    sqrDiv.style.backgroundColor = "#555";
-  });
-  sqrDiv.addEventListener("mouseleave", () => {
-    sqrDiv.style.backgroundColor = "antiquewhite";
-  });
+    sqrDiv.addEventListener("mouseenter", () => {
+      sqrDiv.style.backgroundColor = "#555";
+    });
+    sqrDiv.addEventListener("mouseleave", () => {
+      sqrDiv.style.backgroundColor = "antiquewhite";
+    });
+  }
 }
 
 const removeDivs = () => {
@@ -52,6 +54,7 @@ askNewGrid.addEventListener("click", () => {
       removeDivs();
       createGrid();
       addStyle();
+      addEventListeners();
     }
   } while (
     !Number.isInteger(Number(userInput)) ||
