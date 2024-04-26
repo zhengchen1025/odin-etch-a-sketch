@@ -28,7 +28,8 @@ function addEventListeners() {
     const sqrDiv = sqrDivs[i];
 
     sqrDiv.addEventListener("mouseenter", () => {
-      sqrDiv.style.backgroundColor = "#555";
+      const randomColor = generateRandomColor();
+      sqrDiv.style.backgroundColor = randomColor;
     });
     sqrDiv.addEventListener("mouseleave", () => {
       sqrDiv.style.backgroundColor = "antiquewhite";
@@ -63,3 +64,10 @@ askNewGrid.addEventListener("click", () => {
     userInput < 1
   );
 });
+
+function generateRandomColor() {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  return `rgb(${r}, ${g}, ${b})`;
+}
