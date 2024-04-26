@@ -21,6 +21,7 @@ function addStyle() {
 
 createGrid();
 addStyle();
+addEventListeners();
 
 function addEventListeners() {
   for (let i = 0; i < sqrDivs.length; i++) {
