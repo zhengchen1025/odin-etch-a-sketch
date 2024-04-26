@@ -1,22 +1,61 @@
 const container = document.getElementById("container");
 const sqrDivs = document.getElementsByClassName("sqrDiv");
+const askNewGrid = document.getElementById("askNewGrid");
+let sqrsPerSide = 16;
 
 function createGrid() {
-  for (let i = 0; i < 256; i++) {
+  for (let i = 0; i < sqrsPerSide * sqrsPerSide; i++) {
     container.innerHTML += `<div class='sqrDiv' id='div${i}'></div>`;
   }
 }
 
-createGrid();
-
 function addStyle() {
   for (let i = 0; i < sqrDivs.length; i++) {
-    sqrDivs[i].style.width = "40px";
-    sqrDivs[i].style.height = "40px";
-    sqrDivs[i].style.borderColor = "black";
+    sqrDivs[i].style.height = "100%";
+    sqrDivs[i].style.border = "1px solid black";
     sqrDivs[i].style.backgroundColor = "antiquewhite";
-    sqrDivs[i].style.flexBasis = "calc(100% / 16)";
+    container.style.gridTemplateColumns = `repeat(${sqrsPerSide}, 1fr)`;
+    container.style.gridTemplateRows = `repeat(${sqrsPerSide}, 1fr)`;
   }
 }
 
+createGrid();
 addStyle();
+
+for (let i = 0; i < sqrDivs.length; i++) {
+  const sqrDiv = sqrDivs[i];
+
+  sqrDiv.addEventListener("mouseenter", () => {
+    sqrDiv.style.backgroundColor = "#555";
+  });
+  sqrDiv.addEventListener("mouseleave", () => {
+    sqrDiv.style.backgroundColor = "antiquewhite";
+  });
+}
+
+const removeDivs = () => {
+  while (sqrDivs.length > 0) {
+    sqrDivs[0].remove();
+  }
+};
+
+askNewGrid.addEventListener("click", () => {
+  let userInput;
+  do {
+    userInput = prompt("how many squares per side do you like? (1-100)");
+    if (userInput > 100 || userInput < 1) {
+      alert("squares must be 1-100)");
+    } else if (!Number.isInteger(Number(userInput))) {
+      alert("please enter a INTEGER.");
+    } else {
+      sqrsPerSide = userInput;
+      removeDivs();
+      createGrid();
+      addStyle();
+    }
+  } while (
+    !Number.isInteger(Number(userInput)) ||
+    userInput > 100 ||
+    userInput < 1
+  );
+});
